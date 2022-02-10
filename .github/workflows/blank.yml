@@ -29,6 +29,12 @@ jobs:
     - name: check repo size
       run: |
         du -h
+      
+    - name: install dependencies
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y wget curl grep gzip findutils git
+        pip3 install git-filter-repo
     
     - name: remove binary files from history (reduce the repo size)
       run: |
@@ -41,11 +47,6 @@ jobs:
         git push origin --all
         git reflog expire --expire=now --all
         git gc --aggressive --prune=now
-      
-    - name: install dependencies
-      run: |
-        sudo apt-get update 
-        sudo apt-get install -y wget curl grep gzip findutils git
     
     - name: download from iblocklist
       run: |
