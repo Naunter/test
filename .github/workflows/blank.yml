@@ -38,8 +38,7 @@ jobs:
     
     - name: remove binary files from history (reduce the repo size)
       run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        cd /home/runner/work/test/test
         git filter-repo --path 'bt_blocklists.gz' --path 'bt_blocklists' --invert-paths
         git push origin --force 'refs/heads/*'
         git push origin --force 'refs/tags/*'
