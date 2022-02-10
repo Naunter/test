@@ -38,7 +38,9 @@ jobs:
     
     - name: remove binary files from history (reduce the repo size)
       run: |
-        cd /home/runner/work/test/test
+        git remote add origin git@github.com:Naunter/test.git
+        git remote -v
+        git branch -r
         git filter-repo --path 'bt_blocklists.gz' --path 'bt_blocklists' --invert-paths
         git push origin --force 'refs/heads/*'
         git push origin --force 'refs/tags/*'
