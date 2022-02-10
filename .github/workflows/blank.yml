@@ -85,7 +85,7 @@ jobs:
       run: |
         git add .
         git commit -m "auto update"
-        git push origin --force --all
+        git push origin --all
         du -sh .git
         
     - name: check repo size
