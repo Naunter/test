@@ -1,0 +1,36 @@
+name: compare files
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    - name: check gitee date
+      run: |
+        DATE=$(date +"%Y-%m-%d")
+        if curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://gitee.com/bdo-cnhope/bdocn/blob/master/split_loc_tw/part0001 | grep -o $DATE; then
+          echo "ok"
+        else
+          echo "no"
+          exit 2
+        fi
+
+    - name: check github date
+      run: |
+        DATE=$(date +"%Y-%m-%d")
+        if curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://github.com/BDO-CnHope/bdocn/blob/master/split_loc_tw/part0001 | grep -o $DATE; then
+          echo "ok"
+        else
+          echo "no"
+          exit 2
+        fi
